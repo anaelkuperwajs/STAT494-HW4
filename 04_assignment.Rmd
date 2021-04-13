@@ -52,55 +52,57 @@ bestsellers <- read_sheet("https://docs.google.com/spreadsheets/d/1n3xKHK4-t5S73
 
 1. Find books with multiple authors (HINT: Consider the possibility of an author having “and” in their name)
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>% 
-  mutate(mult_auth =str_???(???, "???")) %>% 
+  mutate(mult_auth = str_detect(author, " and ")) %>% 
   filter(mult_auth)
 ```
 
 2. Detect if the author’s first name starts with a vowel
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>% 
-  mutate(vowel =str_???(author, "???")) %>% 
+  mutate(vowel = str_detect(author, c("^A","^E","^I","^O","^U"))) %>% 
   filter(vowel)
 ```
 
 3. Change all authors with the name Alexander to Alex
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>% 
-  mutate(names = str_???_???(???, "Alexander", "Alex"))
+  mutate(names = str_replace_all(author, "Alexander", "Alex"))
 ```
 
 4. Find books that are the second book in a series
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>%
-  mutate(series = str_???(???, 
-                          pattern = "???")) %>%
+  mutate(series = str_detect(description, 
+                          pattern = "second")) %>%
   filter(series == TRUE)
 ```
 
 5. Find books that are the third or fourth one in a series
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>%
-  mutate(series = str_???(???, 
-                          pattern = "???")) %>%
+  mutate(series = str_detect(description, 
+                          pattern = c("third", "fourth"))) %>%
   filter(series == TRUE)
 ```
 
 6. Find books that are the 10th, 11th, ..., or 19th book in a series
 
-```{r, eval=FALSE}
+```{r}
 bestsellers %>%
-  mutate(series = str_???(???, 
-                          pattern = "???")) %>%
+  mutate(series = str_detect(description, 
+                          pattern = c("10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th"))) %>%
   filter(series == TRUE)
 ```
 
 7. Describe in your own words how you would go about writing a regular expression for password pattern matching (ie 8 character minimum, one capital letter minimum, one lowercase letter minimum, one digit minimum, one special character minimum)
+
+I would use str_detect to make sure the password meets the requirements of having one capital letter minimum, one lowercase letter minimum, one digit minimum, one special character minimum. To make this simpler, I would use character classes individually on each requirement so that I could include all capital letters, all lowercase letters, all digits, and all special characters when detecting. I could also use the quantifier of + to ensure there is at least one of each of those, but if there are more than one that passes as well. Finally, to ensure there are 8 characters minimum I would use the character class that includes all alphabetic characters and digits and place a quantifier of {8,}.
 
 
 ## `tmap` exercises
@@ -129,21 +131,21 @@ data("metro")
 1. Make a world map using the base **World** dataset we used with the COVID example. Add information about income groups (income_grp) to the plot, specify a color palette.
 
 
-```{r, eval = FALSE}
+```{r}
 # let's explore the variable names of each dataset
 names(World)
 names(metro)
 ```
 
 
-```{r, eval = FALSE}
+```{r}
 # Set your mode
 tmap_mode('plot')
 
 tm_shape(World) +
-    tm_polygons("??", 
-                palette="??", 
-                contrast= ??, 
+    tm_polygons("life_exp", 
+                palette="-Greens", 
+                contrast= .8, 
                 id="name", 
                 title="Income group")
 ```
@@ -154,18 +156,18 @@ tm_shape(World) +
 
 2. To the plot from (1), add the new dataset **metro** to the plot, and add information about cities' populations in 2020.
 
-```{r, eval = FALSE}
+```{r}
 # Set your mode
 tmap_mode('plot')
 
 tm_shape(World) +
-  tm_polygons("??", 
-              palette="??", 
-              contrast= ??, 
+  tm_polygons("life_exp", 
+              palette="-Greens", 
+              contrast= .8, 
               id="name", 
               title="Income group") +
   tm_shape(metro) +
-  tm_??("??", 
+  tm_bubbles("pop2020", 
         contrast=1, 
         title.size="Metro population", 
         id="name")  #HINT: what other tm_type can we add here?
@@ -177,13 +179,13 @@ tm_shape(World) +
 
 3. Now, make a new plot with the World data that provides a look at country economic status and the inequality associated with each. 
 
-```{r, eval = FALSE}
+```{r}
 # Set your mode
 tmap_mode('plot')
 
-tm_shape(??) +
-  tm_polygons("??") +
-  tm_bubbles("??", 
+tm_shape(World) +
+  tm_polygons("economy") +
+  tm_bubbles("inequality", 
              border.alpha = .5) +
   tm_format("World_wide") 
 ```
@@ -194,7 +196,7 @@ tm_shape(??) +
 4. Using a new data set, NDL_muni municipality data from the Netherlands, create a plot with two separate maps.  One showing the percentage of men per municipality of the whole country, and one showing the same but faceted by **province**.
 
 
-```{r, eval = FALSE}
+```{r}
 tmap_mode("plot")
 
 data(NLD_muni)
@@ -202,16 +204,16 @@ data(NLD_muni)
 NLD_muni <- NLD_muni %>% 
   mutate(perc_men = pop_men / population * 100)
 
-??? <- tm_shape(NLD_muni) + 
-  tm_polygons("???", 
+tm1 <- tm_shape(NLD_muni) + 
+  tm_polygons("perc_men", 
               palette = 'RdYlBu')
 
-??? <- tm_shape(NLD_muni) +
+tm2 <- tm_shape(NLD_muni) +
     tm_polygons("perc_men", 
                 palette = "RdYlBu") +
-    tm_facets(by = "???")
+    tm_facets(by = "province")
 
-tmap_arrange(???, ???)
+tmap_arrange(tm1, tm2)
 ```
 
 
