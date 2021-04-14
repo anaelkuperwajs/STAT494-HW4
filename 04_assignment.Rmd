@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ```
 
 ```{r libraries, message=FALSE}
@@ -223,6 +223,12 @@ I'm hoping that the topic for this week is a review for all of you, but it's goo
 
 **Task:**
 
-Read both short articles in Week6. Data visualization section of [Calling Bulllshit](https://www.callingbullshit.org/syllabus.html#Visual). Were there any principles mentioned that you hadn't heard of before? What graph stood out for you as "the worst"? Did any of the graphs fool you? Or were able to overcome the bad practices (don't worry if they fool you - plently of them have fooled me, too.)? How does practicing good data visualization principles fit in with data ethics?
+Read both short articles in Week6. Data visualization section of [Calling Bulllshit](https://www.callingbullshit.org/syllabus.html#Visual). Were there any principles mentioned that you hadn't heard of before? What graph stood out for you as "the worst"? Did any of the graphs fool you? Or were able to overcome the bad practices (don't worry if they fool you - plenty of them have fooled me, too.)? How does practicing good data visualization principles fit in with data ethics?
 
+
+A few of the principles I had heard of before were that line graphs should have numerical values on both axes, the scale of an axis should not change midstream, and that negative percents don't exist. I was familiar with the differences between line graphs and bar graphs, but I was unfamiliar with the reasons why the bar graph scale must reach zero while line graph scales don't have to. The principle of proportional ink is so clear and logical that is quite easily made a profound impact on my understanding of graphs. I think the principle is extremely clever and very interesting, especially because it almost appears to be an artistic choice, but there is mathematical reasoning behind it. I knew that angles of 3D graphs were difficult to interpret and that size and color are harder to compare, but I did not know how the principle applied to the size of individual segments in 3D graphs or why circle size is so difficult to tell apart.
+
+I found the graphs about climate change and the gun deaths in Florida as the worst, simply because they were extremely misleading while also being accessible. It is easy to fall for those two, while the graph with multiple axes on it was so complicated that someone would have to put a lot of effort into reading it in general, which makes it less accessible and, therefore, less dangerous. While not a dangerous topic, I also found the bar chart about books that conceals differences to be one of the worst. Here the purpose is to highlight how important the bible is, while the differences between other books are irrelevant in this case. That can be misleading in other ways, by making people believe that others are engaging in a certain activity or thinking in a certain way, and that can be problematic in more covert ways. I believe the graphs that change the axes would have fooled me, because I often don't check the axes of a graph before looking at the content because I have come to rely on a certain standard. That is bad practice and something I will change.
+
+Practicing good data visualization principles is incredibly important for data ethics. Making sure information is properly accessible to everyone and doesn't spread misinformation is part of maintaining fairness. Furthermore, manipulating visualizations to prove a point or hide the truth only hurts populations that can't investigate further or have the experience with data to be suspicious. This connects to the myth that technology is neutral, because people often believe that presenting data is straightforward. That leads people to trust any infograph or data visualization they see and take it as the truth. That can cause issues when certain data is biased or the choices in presenting that data are biased as well. Data visualizations can cause real-world harm, and the data scientist is responsible for every choice they make.
 
